@@ -23,13 +23,15 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build Info
+      - name: Prepare Web Assets
         run: |
-          echo "Preparing Rich Music Android WebView App..."
+          echo "Preparing Rich Music Web Assets..."
           mkdir -p android_build/assets
           cp -r public/* android_build/assets/
-          echo "Web assets ready for Android wrapper."
+          echo "Web assets ready."
 
-      # Tambahkan langkah build Gradle Android di sini jika template Android native disertakan.
+      # Catatan: Agar Gradle bisa membungkus web ini menjadi APK, repository Anda 
+      # harus menyertakan struktur proyek Android (build.gradle, gradlew, dll).
+      # Jika menggunakan project murni web, gunakan tool pihak ketiga seperti PWABuilder.
       - name: Success Notification
-        run: echo "Build workflow completed successfully!"
+        run: echo "Workflow executed successfully!"
