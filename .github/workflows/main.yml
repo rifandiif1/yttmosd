@@ -1,0 +1,35 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build Info
+        run: |
+          echo "Preparing Rich Music Android WebView App..."
+          mkdir -p android_build/assets
+          cp -r public/* android_build/assets/
+          echo "Web assets ready for Android wrapper."
+
+      # Tambahkan langkah build Gradle Android di sini jika template Android native disertakan.
+      - name: Success Notification
+        run: echo "Build workflow completed successfully!"
